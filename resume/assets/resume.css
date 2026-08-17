@@ -1,0 +1,341 @@
+/* ---------------------------------------------------------------
+   Resume stylesheet — shared by backend.html and ai.html
+   Optimised for Letter print-to-PDF and on-screen review.
+   --------------------------------------------------------------- */
+
+:root {
+  --ink: #14171a;
+  --ink-soft: #3d4550;
+  --ink-faint: #6b7480;
+  --rule: #d4d9e0;
+  --accent: #1a4f7a;
+  --bg: #ffffff;
+
+  --f-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --pt: 9.5pt;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #eef1f5;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #eef1f5;
+  font-family: var(--f-sans);
+  font-size: var(--pt);
+  line-height: 1.34;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The printable sheet ------------------------------------------------ */
+
+.sheet {
+  width: 8.5in;
+  min-height: 11in;
+  margin: 24px auto;
+  padding: 0.42in 0.55in 0.38in;
+  background: var(--bg);
+  box-shadow: 0 2px 18px rgba(20, 30, 45, 0.13);
+}
+
+/* Header ------------------------------------------------------------- */
+
+header {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 7px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 0 0 3px;
+  font-size: 20pt;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--ink);
+}
+
+.tagline {
+  margin: 0 0 7px;
+  font-size: 10pt;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.1px;
+}
+
+.contact {
+  margin: 0;
+  font-size: 9.1pt;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.contact a {
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.contact a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.contact .sep {
+  color: var(--rule);
+  margin: 0 6px;
+}
+
+/* Sections ----------------------------------------------------------- */
+
+section {
+  margin-bottom: 9px;
+}
+
+h2 {
+  margin: 0 0 6px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 9.4pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.35px;
+  color: var(--accent);
+}
+
+.summary {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.42;
+}
+
+/* Roles -------------------------------------------------------------- */
+
+.role {
+  margin-bottom: 8px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.role:last-child {
+  margin-bottom: 0;
+}
+
+.role-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.role-title {
+  font-size: 10.4pt;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.role-title .org {
+  color: var(--accent);
+}
+
+.role-meta {
+  flex-shrink: 0;
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.role-note {
+  margin: 1px 0 4px;
+  font-size: 9.2pt;
+  font-style: italic;
+  color: var(--ink-faint);
+  line-height: 1.45;
+}
+
+/* Nested projects ---------------------------------------------------- */
+
+.project {
+  margin: 6px 0 0 0;
+  padding-left: 11px;
+  border-left: 2px solid var(--rule);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.project-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 2px;
+}
+
+.project-name {
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.project-name a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--ink-faint);
+}
+
+.project-stack {
+  flex-shrink: 0;
+  font-size: 8.5pt;
+  font-weight: 500;
+  color: var(--ink-faint);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.status {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0.5px 5px;
+  border-radius: 3px;
+  background: #eaeef3;
+  font-size: 7.6pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--ink-faint);
+  vertical-align: 1.2px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.status.live {
+  background: #e2efe4;
+  color: #2f6b3d;
+}
+
+/* Bullets ------------------------------------------------------------ */
+
+ul {
+  margin: 4px 0 0;
+  padding-left: 15px;
+}
+
+li {
+  margin-bottom: 1.5px;
+  color: var(--ink-soft);
+  line-height: 1.38;
+}
+
+li::marker {
+  color: var(--ink-faint);
+}
+
+li strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+/* Skills ------------------------------------------------------------- */
+
+/* The label must sit INLINE with its values, not in an aligned column.
+   Any two-column treatment (grid OR flex) makes the PDF layout analyser
+   detect columns and emit all six tier labels before all six value lists,
+   detaching each tier from its technologies for any ATS or LLM screener
+   reading the extracted text. A small hanging indent keeps wrapped lines
+   tidy without opening a gap wide enough to read as a column. */
+
+.skills {
+  margin: 0;
+}
+
+.skill-row {
+  padding-left: 14px;
+  text-indent: -14px;
+  margin-bottom: 3px;
+  font-size: 9.4pt;
+  line-height: 1.4;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.skill-row:last-child {
+  margin-bottom: 0;
+}
+
+.skill-label {
+  display: inline;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.skill-label::after {
+  content: " — ";
+  font-weight: 400;
+  color: var(--ink-faint);
+}
+
+.skill-val {
+  display: inline;
+  color: var(--ink-soft);
+}
+
+/* Education ---------------------------------------------------------- */
+
+.edu-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.edu-line + .edu-line {
+  margin-top: 3px;
+}
+
+.edu-line strong {
+  font-weight: 650;
+}
+
+.edu-line span {
+  flex-shrink: 0;
+  font-size: 9pt;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+/* Print -------------------------------------------------------------- */
+
+@page {
+  size: Letter;
+  margin: 0.4in;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff;
+  }
+
+  .sheet {
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  h2 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+}

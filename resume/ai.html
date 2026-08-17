@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rabin Shrestha — AI / LLM Application Engineer</title>
+    <link rel="stylesheet" href="assets/resume.css" />
+  </head>
+  <body>
+    <main class="sheet">
+      <header>
+        <h1>Rabin Shrestha</h1>
+        <p class="tagline">Senior Software Engineer · AI &amp; LLM Applications</p>
+        <p class="contact">
+          Kathmandu, Nepal · Remote — US &amp; EU overlap hours
+          <span class="sep">|</span>
+          <a href="mailto:shrestha.rabin505@gmail.com">shrestha.rabin505@gmail.com</a>
+          <br />
+          <a href="https://github.com/rabinshrestha">github.com/rabinshrestha</a>
+          <span class="sep">|</span>
+          <a href="https://www.linkedin.com/in/shrestharabin">linkedin.com/in/shrestharabin</a>
+          <span class="sep">|</span>
+          <a href="https://marphalabs.com">marphalabs.com</a>
+        </p>
+      </header>
+
+      <section>
+        <h2>Summary</h2>
+        <p class="summary">
+          Software engineer with 12+ years of backend and distributed-systems experience, now building
+          <strong>LLM-backed products end to end</strong>. Builds the infrastructure that makes LLM products
+          viable in production — multi-provider
+          routing through LiteLLM and OpenRouter, per-user usage and cost tracking from day one, and local
+          inference options so sensitive data never leaves the user's machine. Develops spec-first alongside AI
+          coding agents on production codebases. Previously <strong>founding engineer</strong> at ZenLedger — helped grow it
+          from startup stage through <strong>Series B</strong>, led a team of up to 15, and owned the ingestion
+          platform behind <strong>10B+ transaction rows</strong> and <strong>$50B+ in tracked assets</strong>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+
+        <div class="role">
+          <div class="role-head">
+            <div class="role-title"><span class="org">Marpha Labs</span> — Co-Founder &amp; Engineering Lead</div>
+            <div class="role-meta">Remote · 2025 – Present</div>
+          </div>
+          <p class="role-note">
+            An independent product studio: a distributed collective of builders across Nepal, the USA, Canada,
+            and Australia, self-funding and shipping products to test them in market.
+          </p>
+
+          <div class="project">
+            <div class="project-head">
+              <div class="project-name">
+                FillAnyForms
+                <span class="status">Pre-launch</span>
+              </div>
+              <div class="project-stack">LLM infra · Rails 8.1 · AWS</div>
+            </div>
+            <ul>
+              <li>
+                Built an <strong>AI-assisted document processing system</strong> that extracts fillable fields
+                from PDFs — and from scans via image-to-text — and maps structured user data into them, on a
+                Rails 8.1 API with Sidekiq keeping inference off the request path.
+              </li>
+              <li>
+                Built the LLM layer end to end: a <strong>LiteLLM proxy</strong> over OpenRouter giving the
+                platform multi-provider model routing, virtual API keys per consumer, and <strong>per-user usage
+                and cost tracking</strong> persisted server-side — so spend is attributable and capped per
+                account, not discovered on the monthly bill.
+              </li>
+              <li>
+                Added a <strong>privacy mode</strong> routing inference to the user's own Ollama or
+                OpenAI-compatible endpoint, so document data never leaves their machine — one mapper interface,
+                cloud or local backend behind it.
+              </li>
+              <li>
+                Built a companion browser extension as a <strong>user-controlled identity wallet</strong> (BIP-39,
+                <code>did:key</code>, client-side encryption), keeping the personal data that feeds the model on
+                the user's own device.
+              </li>
+            </ul>
+          </div>
+
+          <div class="project">
+            <div class="project-head">
+              <div class="project-name">
+                HabreCare
+                <span class="status">In development</span>
+              </div>
+              <div class="project-stack">React Native · Expo · Supabase</div>
+            </div>
+            <ul>
+              <li>
+                Building a mental-wellbeing app for anxiety, insomnia, and overthinking on Expo SDK 54 and React
+                Native 0.81 in strict TypeScript, for iOS and Android.
+              </li>
+              <li>
+                Develop <strong>spec-first with AI coding agents</strong>: written design specs and a
+                decision log per feature, committed agent instruction files, and automated typecheck, lint, and
+                test gates every agent-authored change must pass before merge.
+              </li>
+              <li>
+                Architected <strong>local-first sync</strong> — writes land on-device instantly and offline, then
+                reconcile to Supabase under per-user row-level security — with media uploading through
+                short-lived presigned Cloudflare R2 URLs minted by edge functions.
+              </li>
+            </ul>
+          </div>
+
+          <div class="project">
+            <div class="project-head">
+              <div class="project-name">
+                <a href="https://marphalabs.com/swift-scout">SwiftScout</a>
+                <span class="status live">Live on App Store</span>
+              </div>
+              <div class="project-stack">Native iOS · Swift</div>
+            </div>
+            <ul>
+              <li>
+                Shipped a native iOS app alerting drivers to <strong>51 enforcement cameras across San Francisco
+                and Oakland</strong>, processed <strong>entirely on-device</strong> for privacy; on the App Store
+                since April 2026 across six releases.
+              </li>
+              <li>
+                Took the app from first commit through App Store review and pricing as a paid subscription
+                product, after learning Swift and the native iOS toolchain from a Rails/Go background.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="role">
+          <div class="role-head">
+            <div class="role-title">
+              <span class="org">ZenLedger.io</span> — Founding Engineer &amp; Lead Software Engineer
+            </div>
+            <div class="role-meta">Remote · 2018 – 2025</div>
+          </div>
+          <p class="role-note">
+            Crypto tax and accounting platform. Joined at startup stage as a founding engineer and scaled the
+            product and engineering team through its Series B round, on a team distributed across North
+            America, Europe, and Nepal.
+          </p>
+          <ul>
+            <li>
+              Owned the data ingestion and parsing platform integrating <strong>100+ cryptocurrency exchanges and
+              blockchains</strong>, processing <strong>10B+ transaction rows</strong> and tracking
+              <strong>$50B+ in customer assets</strong> across <strong>100K+ customers</strong>.
+            </li>
+            <li>
+              Led an engineering team of <strong>up to 15</strong>, setting engineering standards, owning delivery
+              timelines, and driving architecture and specification reviews across teams.
+            </li>
+            <li>
+              Served as the core engineer on the tax calculation and automated report generation pipeline, and
+              <strong>rewrote the calculation service from Rails/Sidekiq to Go</strong> — <strong>70% less
+              compute</strong> for the same workload, running <strong>60% faster</strong>, cutting compute spend
+              proportionally.
+            </li>
+            <li>
+              Built and operated the payment system, and designed <strong>autoscaling AWS infrastructure</strong>
+              that matched capacity to highly seasonal demand, protecting availability at peak while holding down
+              off-peak cost.
+            </li>
+            <li>
+              Built services in Ruby on Rails, Go, and React, with background processing on Sidekiq and Faktory,
+              instrumented through Grafana, Datadog, and ScoutAPM.
+            </li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <div class="role-head">
+            <div class="role-title">
+              <span class="org">EB Pearls</span> — Software Engineer → Associate Project Manager
+            </div>
+            <div class="role-meta">Kathmandu · 2013 – 2018</div>
+          </div>
+          <ul>
+            <li>
+              Delivered <strong>6+ enterprise projects</strong> for an Australia-based client in PHP
+              (CodeIgniter, Laravel) and MySQL, from requirements through release.
+            </li>
+            <li>
+              Promoted into delivery ownership as Associate Project Manager — <strong>ran delivery across</strong>
+              engineering, QA, and design, owning scope changes, budgets, and release timelines.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Technical Skills</h2>
+        <div class="skills">
+          <div class="skill-row">
+            <div class="skill-label">AI &amp; LLM</div>
+            <div class="skill-val">LLM application design · LiteLLM · OpenRouter · multi-provider routing · virtual keys, usage &amp; per-user cost tracking · local-inference privacy modes (Ollama, OpenAI-compatible) · image-to-text extraction · spec-driven development with AI coding agents</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">Exploring</div>
+            <div class="skill-val">LLM internals · transformer architectures</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">Core</div>
+            <div class="skill-val">Go · Ruby on Rails · TypeScript · React · PostgreSQL · Redis · AWS · Docker</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">Strong</div>
+            <div class="skill-val">React Native (Expo) · Next.js · Swift / native iOS · Supabase · Sidekiq · Faktory · OpenTofu/Terraform · Cloudflare (R2, CDN) · GitHub Actions · RSpec · Jest · Playwright</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">Familiar</div>
+            <div class="skill-val">MySQL · PHP (Laravel, CodeIgniter) · Preact · Grafana · Datadog · ScoutAPM · CircleCI · Maestro</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">Leadership</div>
+            <div class="skill-val">Team leadership (up to 15 engineers) · architecture &amp; delivery ownership · Agile/Scrum · Certified ScrumMaster (CSM)</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <div class="edu-line">
+          <div><strong>B.E. Computer Engineering</strong> — Kathmandu University, Dhulikhel, Nepal</div>
+          <span>2009 – 2013</span>
+        </div>
+        <div class="edu-line">
+          <div><strong>Certified ScrumMaster (CSM)</strong> — Scrum Alliance</div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
