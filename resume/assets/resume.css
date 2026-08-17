@@ -16,6 +16,13 @@
   --accent: #1a4f7a;
   --bg: #ffffff;
 
+  /* Chip text is deliberately NOT --ink-faint. That grey clears WCAG AA on
+     white (4.74:1) but only reaches 4.06:1 on the #eaeef3 chip background,
+     under the 4.5 threshold — and the chips are the smallest text on the
+     page at 7.6pt. This darker grey gives 5.62:1. Re-check the ratio if
+     either this or the chip background changes. */
+  --ink-chip: #565e6b;
+
   --f-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
   --pt: 9.5pt;
 }
@@ -37,6 +44,19 @@ body {
   line-height: 1.34;
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
+
+  /* Ligatures OFF. Chrome's print-to-PDF otherwise stores "fi", "ff", "fl"
+     and "ffl" as single glyphs (U+FB00-FB04), so the PDF text layer holds
+     "Cloudﬂare", "Certiﬁed", "spec-ﬁrst" and 9 other words that a plain
+     substring search cannot match. Parsers that apply Unicode NFKC
+     normalisation repair this on their own; parsers that do not, silently
+     miss the keyword. Disabling ligatures is visually identical and costs
+     nothing, so it is not worth depending on the parser being the good kind.
+     Verify after any font change: the exported PDF must contain zero of
+     U+FB00-FB04. */
+  font-variant-ligatures: none;
+  -webkit-font-feature-settings: "liga" 0, "clig" 0;
+  font-feature-settings: "liga" 0, "clig" 0;
 }
 
 /* The printable sheet ------------------------------------------------ */
@@ -167,9 +187,11 @@ h2 {
   color: var(--accent);
 }
 
-/* Linked org / school names inherit their surrounding style so the header
-   row stays visually uniform whether or not a given entry has a URL. The
-   link is still live and clickable in the exported PDF. */
+/* Every link on the page is undecorated and inherits its surrounding colour,
+   so a row looks identical whether or not that entry happens to have a URL.
+   The links are still live and clickable in the exported PDF. Keep this
+   uniform: decorating only the entries that have URLs makes the Experience
+   headers look inconsistent for a reason no reader can interpret. */
 .role-title .org a,
 .edu-line a {
   color: inherit;
@@ -217,9 +239,8 @@ h2 {
 }
 
 .project-name a {
-  color: var(--ink);
+  color: inherit;
   text-decoration: none;
-  border-bottom: 1px dotted var(--ink-faint);
 }
 
 .project-stack {
@@ -241,7 +262,7 @@ h2 {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  color: var(--ink-faint);
+  color: var(--ink-chip);
   vertical-align: 1.2px;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
