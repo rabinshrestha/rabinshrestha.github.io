@@ -279,9 +279,16 @@ h2 {
   widows: 2;
 }
 
+/* Bullets MAY split across a page break. Keeping them atomic left dead space
+   at the foot of the page whenever the next bullet did not fit — and the
+   .projects rail, being a fragmented bordered box, drew down through that empty
+   space to the page edge, leaving a vertical line beside nothing. Letting the
+   bullet start on the first page fills the space and the rail always runs
+   alongside real text. orphans/widows keep at least two lines on either side of
+   the break so a single line never dangles. */
 .project li {
-  break-inside: avoid;
-  page-break-inside: avoid;
+  orphans: 2;
+  widows: 2;
 }
 
 /* Projects carry NO left rail or marker — the padding-left on .project is the
