@@ -72,22 +72,36 @@ body {
 
 /* Header ------------------------------------------------------------- */
 
+/* Header — name and tagline left, contact stacked top-right with icons.
+   Grid PLACES the existing elements; the DOM is unchanged. The contact text
+   itself stays real text (only the icons are SVG), so it remains extractable
+   and searchable in the PDF. */
+
 header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  column-gap: 26px;
   border-bottom: 2px solid var(--accent);
-  padding-bottom: 9px;
-  margin-bottom: 16px;
+  padding-bottom: 11px;
+  margin-bottom: 20px;
 }
 
 h1 {
-  margin: 0 0 3px;
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0 0 4px;
   font-size: 20pt;
   font-weight: 700;
   letter-spacing: -0.4px;
+  line-height: 1.1;
   color: var(--ink);
 }
 
 .tagline {
-  margin: 0 0 7px;
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
   font-size: 10pt;
   font-weight: 600;
   color: var(--accent);
@@ -95,10 +109,31 @@ h1 {
 }
 
 .contact {
+  grid-column: 2;
+  grid-row: 1 / span 2;
   margin: 0;
-  font-size: 9.1pt;
+  align-self: end;
+  text-align: right;
+  font-size: 8.9pt;
   color: var(--ink-soft);
-  line-height: 1.6;
+}
+
+.c-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  line-height: 1.62;
+  white-space: nowrap;
+}
+
+.contact svg {
+  flex-shrink: 0;
+  width: 9.5px;
+  height: 9.5px;
+  fill: var(--ink-faint);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 .contact a {
@@ -111,18 +146,13 @@ h1 {
   text-decoration: underline;
 }
 
-.contact .sep {
-  color: var(--rule);
-  margin: 0 6px;
-}
-
 /* Sections ----------------------------------------------------------- */
 
 /* Section gap is the largest space on the page — it is what separates
    SUMMARY / EXPERIENCE / TECHNICAL SKILLS / EDUCATION from each other,
    so it must stay clearly bigger than the role and project gaps below. */
 section {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 section:last-child {
@@ -153,7 +183,7 @@ h2 {
    split from landing somewhere ugly: the header never separates from its first
    content, and .project blocks stay intact. */
 .role {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   break-inside: auto;
   page-break-inside: auto;
   orphans: 2;
@@ -164,6 +194,10 @@ h2 {
 .role-note {
   break-after: avoid;
   page-break-after: avoid;
+  /* Also keep each of these intact: without break-inside the italic role note
+     splits mid-sentence across a page boundary. */
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .role:last-child {
@@ -207,7 +241,7 @@ h2 {
 }
 
 .role-note {
-  margin: 3px 0 7px;
+  margin: 3px 0 9px;
   font-size: 9.2pt;
   font-style: italic;
   color: var(--ink-faint);
@@ -216,20 +250,60 @@ h2 {
 
 /* Nested projects ---------------------------------------------------- */
 
+/* A project may split across pages. Keeping it atomic meant a tall project
+   (BATS, 3 long bullets) dragged its whole role heading to the next page and
+   left a third of the previous page empty. Individual <li>s stay unbreakable,
+   and .project-head below can never strand from its first bullet, so a split
+   lands between bullets. */
+/* ONE continuous hairline per role, drawn on the .projects wrapper rather than
+   on each .project. Putting it on .project produced a separate segment per
+   project — a line that kept starting and stopping. The wrapper also keeps the
+   indent, which is what signals the projects nest under the role above. */
+.projects {
+  margin-top: 9px;
+  padding-left: 13px;
+  border-left: 1px solid var(--rule);
+  break-inside: auto;
+  page-break-inside: auto;
+}
+
+.project:first-child {
+  margin-top: 0;
+}
+
 .project {
-  margin: 11px 0 0 0;
-  padding-left: 11px;
-  border-left: 2px solid var(--rule);
+  margin: 13px 0 0 0;
+  break-inside: auto;
+  page-break-inside: auto;
+  orphans: 2;
+  widows: 2;
+}
+
+.project li {
   break-inside: avoid;
   page-break-inside: avoid;
 }
 
+/* Projects carry NO left rail or marker — the padding-left on .project is the
+   only thing signalling that they nest under the role above. Earlier versions
+   used a full-height rail (fragmented into a disconnected segment per project,
+   and re-drew after every page break) and then a short accent tick.
+
+   If you ever add a marker back, build it from a border, never from an
+   absolutely-positioned ::before. A positioned element makes .project a
+   positioned box, which Chrome paints in a later layer — that pushes every
+   project's text after all normal-flow content in the PDF text layer and
+   scrambles the reading order (measured: the ZenLedger heading emitted before
+   the Marpha projects, and ZenLedger Platform after EDUCATION). Same failure
+   that killed the sidebar layout. Re-run the extraction-order check. */
 .project-head {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 12px;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
+  break-after: avoid;
+  page-break-after: avoid;
 }
 
 .project-name {
@@ -371,7 +445,7 @@ li strong {
 
 @page {
   size: Letter;
-  margin: 0.4in;
+  margin: 0.5in;
 }
 
 @media print {

@@ -1,0 +1,224 @@
+/* ------------------------------------------------------------------
+   LAYOUT: CLASSIC
+   Traditional serif resume in the Harvard / consulting house style.
+   Centred header, no colour, rules under every section heading.
+   Most conservative option — reads as a document, not a design.
+   Single column, so ATS reading order is trivially correct.
+   ------------------------------------------------------------------ */
+
+:root {
+  --ink: #000;
+  --ink-soft: #1c1c1c;
+  --ink-faint: #4a4a4a;
+  --rule: #000;
+  --bg: #fff;
+  --pt: 10pt;
+}
+
+* { box-sizing: border-box; }
+
+html { background: #e9e9e9; }
+
+body {
+  margin: 0;
+  background: #e9e9e9;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: var(--pt);
+  line-height: 1.36;
+  color: var(--ink-soft);
+  font-variant-ligatures: none;
+  -webkit-font-feature-settings: "liga" 0, "clig" 0;
+  font-feature-settings: "liga" 0, "clig" 0;
+}
+
+.sheet {
+  width: 8.5in;
+  min-height: 11in;
+  margin: 24px auto;
+  padding: 0.5in 0.7in;
+  background: var(--bg);
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.14);
+}
+
+/* Header — centred, the classic signature of this style */
+
+header {
+  text-align: center;
+  border-bottom: 1.5px solid var(--rule);
+  padding-bottom: 9px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  margin: 0 0 4px;
+  font-size: 21pt;
+  font-weight: 400;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.tagline {
+  margin: 0 0 6px;
+  font-size: 10.5pt;
+  font-style: italic;
+  color: var(--ink-faint);
+}
+
+.contact {
+  margin: 0;
+  font-size: 9.2pt;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.contact a { color: inherit; text-decoration: none; }
+.contact .sep { margin: 0 5px; color: var(--ink-faint); }
+
+/* Classic keeps the traditional centred, inline contact line: icons are
+   suppressed and the items flow with middot separators rather than stacking. */
+.contact svg { display: none; }
+.contact .c-item { display: inline; white-space: normal; }
+.contact .c-item + .c-item::before {
+  content: " · ";
+  color: var(--ink-faint);
+}
+
+/* Sections */
+
+section { margin-bottom: 13px; }
+section:last-child { margin-bottom: 0; }
+
+h2 {
+  margin: 0 0 7px;
+  padding-bottom: 2px;
+  border-bottom: 0.75px solid var(--rule);
+  font-size: 10.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  color: var(--ink);
+}
+
+.summary { margin: 0; text-align: justify; }
+
+/* Roles */
+
+.role { margin-bottom: 11px; break-inside: auto; orphans: 2; widows: 2; }
+.role:last-child { margin-bottom: 0; }
+
+.role-head, .role-note {
+  break-after: avoid; page-break-after: avoid;
+  break-inside: avoid; page-break-inside: avoid;
+}
+
+.role-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.role-title { font-size: 11pt; color: var(--ink); }
+.role-title .org { font-weight: 700; }
+.role-title .org a { color: inherit; text-decoration: none; }
+
+.role-meta {
+  flex-shrink: 0;
+  font-size: 9.5pt;
+  font-style: italic;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.role-note {
+  margin: 2px 0 6px;
+  font-size: 9.4pt;
+  font-style: italic;
+  color: var(--ink-faint);
+}
+
+/* Projects — indented, no rail */
+
+.project { margin: 8px 0 0 0; padding-left: 16px; break-inside: avoid; }
+
+.project-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 3px;
+}
+
+.project-name { font-size: 10.2pt; font-weight: 700; color: var(--ink); }
+.project-name a { color: inherit; text-decoration: none; }
+
+.project-stack {
+  flex-shrink: 0;
+  font-size: 8.8pt;
+  font-style: italic;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.status {
+  margin-left: 7px;
+  font-size: 8pt;
+  font-weight: 400;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink-faint);
+}
+.status::before { content: "("; }
+.status::after { content: ")"; }
+
+/* Bullets */
+
+ul { margin: 4px 0 0; padding-left: 17px; }
+li { margin-bottom: 2px; line-height: 1.38; }
+li:last-child { margin-bottom: 0; }
+li strong { font-weight: 700; color: var(--ink); }
+
+/* Skills — inline label, single column (keeps ATS reading order intact) */
+
+.skill-row {
+  padding-left: 15px;
+  text-indent: -15px;
+  margin-bottom: 4px;
+  line-height: 1.4;
+  break-inside: avoid;
+}
+.skill-row:last-child { margin-bottom: 0; }
+.skill-label { display: inline; font-weight: 700; color: var(--ink); }
+.skill-label::after { content: ": "; font-weight: 400; }
+.skill-val { display: inline; }
+
+/* Education */
+
+.edu-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+}
+.edu-line + .edu-line { margin-top: 4px; }
+.edu-line a { color: inherit; text-decoration: none; }
+.edu-line span {
+  flex-shrink: 0;
+  font-style: italic;
+  font-size: 9.5pt;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+/* Print */
+
+@page { size: Letter; margin: 0.45in; }
+
+@media print {
+  html, body { background: #fff; }
+  .sheet { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+  a { text-decoration: none; }
+  h2 { break-after: avoid; page-break-after: avoid; }
+}
