@@ -76,7 +76,14 @@ h1 {
 .contact .sep { margin: 0 5px; color: var(--ink-faint); }
 
 /* Classic keeps the traditional centred, inline contact line: icons are
-   suppressed and the items flow with middot separators rather than stacking. */
+   suppressed and the items flow with middot separators rather than stacking.
+   The location line stays its own centred row above it. */
+.location {
+  margin: 0 0 4px;
+  font-size: 9.2pt;
+  color: var(--ink-soft);
+}
+.location svg { display: none; }
 .contact svg { display: none; }
 .contact .c-item { display: inline; white-space: normal; }
 .contact .c-item + .c-item::before {
