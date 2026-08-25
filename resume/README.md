@@ -25,8 +25,7 @@ resume/
 ├── assets/
 │   └── resume.css     shared styles (screen + print)
 ├── ai.html            the resume — edit content HERE
-├── layouts/           alternative stylesheets (classic) + generated HTML
-└── dist/              exported PDFs (git-ignored by default)
+└── layouts/           alternative stylesheets (classic) + generated HTML
 ```
 
 ## Preview
@@ -44,7 +43,8 @@ opening the file directly works.
 2. **File → Print** (`⌘P`).
 3. Destination **Save as PDF**, paper **Letter**, margins **Default**,
    **Background graphics ON** (the section rules and status chips need it).
-4. Save into `dist/` as `rabin-shrestha-ai.pdf`.
+4. Save over `../resume.pdf` — the published file, and the only build
+   artefact kept in the repo.
 
 The page CSS already sets `@page { size: Letter; margin: 0.45in }`, so Chrome's
 own margin setting should stay on Default — overriding it will double the
@@ -53,12 +53,16 @@ margins.
 ## Publishing
 
 The live resume is served from the repo root as `resume.pdf`
-(<https://rabinshrestha.github.io/resume.pdf>). To publish a new version, copy
-the exported PDF over that file:
+(<https://rabinshrestha.github.io/resume.pdf>). Build straight to it:
 
 ```bash
-cp resume/dist/rabin-shrestha-ai.pdf resume.pdf
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+  --disable-gpu --no-pdf-header-footer \
+  --print-to-pdf="$PWD/resume.pdf" "file://$PWD/resume/ai.html"
 ```
+
+There is no `dist/`. `resume.pdf` is the single artefact; every other build
+is transient.
 
 Keep the filename `resume.pdf` — it is the URL people already have.
 
