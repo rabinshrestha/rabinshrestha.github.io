@@ -10,12 +10,20 @@ purpose: the fintech experience (ZenLedger, 2018-2025) and the AI work (Marpha
 Labs, 2025-) do not overlap, so the resume never implies shipped "AI for
 fintech" experience.
 
-`layouts/classic.html` renders the same content in a serif, no-colour,
-traditional style for conservative employers. See `layouts/README.md`.
+There is one variant and one artefact. `ai.html` builds straight to
+`../resume.pdf`.
 
-A backend / full-stack variant (`backend.html`) existed until August 2026, as
-did `compact` and `sidebar` layouts. All were dropped to keep the set small;
-recover them from git history if needed.
+Several variants have existed and been dropped to keep the set to one:
+`backend.html`, the `compact` and `sidebar` layouts, a serif `classic` layout,
+and a `tailored/` resume aimed at a specific posting. All are recoverable from
+git history.
+
+The `sidebar` layout is worth remembering as a negative result. It kept a
+linear DOM and merely *placed* sections with CSS Grid, on the theory that PDF
+extraction order would follow source order. It does not — Chrome emits PDF text
+by geometric band, so the rail cut into the middle of a role and scrambled the
+reading order. Do not rebuild a two-column print layout without re-running the
+extraction-order check.
 
 ## Structure
 
@@ -24,8 +32,7 @@ resume/
 ├── README.md          this file
 ├── assets/
 │   └── resume.css     shared styles (screen + print)
-├── ai.html            the resume — edit content HERE
-└── layouts/           alternative stylesheets (classic) + generated HTML
+└── ai.html            the resume — edit content HERE
 ```
 
 ## Preview
@@ -80,7 +87,7 @@ Keep the filename `resume.pdf` — it is the URL people already have.
 - Never frame learning a new language or shipping end-to-end as an achievement.
   Both are assumed at senior level and reading them as accomplishments signals
   the opposite.
-- After editing, regenerate `layouts/classic.html` and re-export both PDFs.
+- After editing, re-export `resume.pdf` and re-run the checks below.
 - Page margin is **0.5in**. At 0.4in nothing clipped, but the right-aligned
   column (contact, dates, stacks) sat flush against the edge and read as
   trimmed. 0.45-0.55in all still fit two pages, so there is headroom.
@@ -97,8 +104,6 @@ Keep the filename `resume.pdf` — it is the URL people already have.
   (`aria-hidden`), vector not raster, and every contact value stays real text —
   verify with an extraction check after touching the header, since a two-column
   header is the same construction that scrambled the dropped sidebar layout.
-  `classic.css` suppresses the icons and reflows the items inline; it is a
-  traditional centred header on purpose.
 - `marphalabs.com` is linked on the Marpha Labs role header only. It used to
   appear in the contact block too — one URL, two links on one page.
 - The **BATS / IRS** claim is safe to state publicly. ZenLedger's contract with
